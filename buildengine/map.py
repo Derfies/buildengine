@@ -193,9 +193,9 @@ class MapReaderBase(metaclass=abc.ABCMeta):
     def get_numwalls(self, file):
         return struct.unpack('<H', file.read(2))[0]
 
-    def get_walls(self, file, numsectors):
+    def get_walls(self, file, numwalls):
         walls = []
-        for _ in range(numsectors):
+        for _ in range(numwalls):
             data = file.read(self.wall_size)
             unpacked = struct.unpack('<iihhhhhbBhBBBBhhh', data)
             walls.append(Wall(*unpacked))
@@ -204,9 +204,9 @@ class MapReaderBase(metaclass=abc.ABCMeta):
     def get_numsprites(self, file):
         return struct.unpack('<H', file.read(2))[0]
 
-    def get_sprites(self, file, numsectors):
+    def get_sprites(self, file, numsprites):
         sprites = []
-        for _ in range(numsectors):
+        for _ in range(numsprites):
             data = file.read(self.sprite_size)
             unpacked = struct.unpack('<iiihhbBBBBBbbhhhhhhhhhh', data)
             sprites.append(Sprite(*unpacked))

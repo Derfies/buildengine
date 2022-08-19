@@ -194,23 +194,23 @@ class MapReaderBase(metaclass=abc.ABCMeta):
         return struct.unpack('<H', file.read(2))[0]
 
     def get_walls(self, file, numsectors):
-        sectors = []
+        walls = []
         for _ in range(numsectors):
             data = file.read(self.wall_size)
             unpacked = struct.unpack('<iihhhhhbBhBBBBhhh', data)
-            sectors.append(Wall(*unpacked))
-        return sectors
+            walls.append(Wall(*unpacked))
+        return walls
 
     def get_numsprites(self, file):
         return struct.unpack('<H', file.read(2))[0]
 
     def get_sprites(self, file, numsectors):
-        sectors = []
+        sprites = []
         for _ in range(numsectors):
             data = file.read(self.sprite_size)
             unpacked = struct.unpack('<iiihhbBBBBBbbhhhhhhhhhh', data)
-            sectors.append(Sprite(*unpacked))
-        return sectors
+            sprites.append(Sprite(*unpacked))
+        return sprites
 
 
 class Duke3dMapReader(MapReaderBase):
